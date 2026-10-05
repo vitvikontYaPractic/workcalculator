@@ -1,0 +1,234 @@
+<ItemButton@MDRectangleFlatIconButton>:
+    size_hint_x: 1
+    font_size: '18sp'
+    text_color: 0, 0, 0, 1
+    md_bg_color: "#0ceb33"
+    icon_color: "black"
+    halign: 'left'
+    valign: 'top'
+
+<ItemLabel@MDLabel>:
+    font_size: '22sp'
+    halign: 'center'
+    valign: 'bottom'
+
+<Box>:
+    padding: 10
+    orientation: "vertical"
+    spacing: 10
+
+    drop_btn: speed_dial
+    menu_bt: button_menu
+    label_product: name_product
+    enter_text: text_input
+    label_widget1: label_numer
+    label_widget2: label_Pn
+    label_widget3: label_Pc
+    label_widget4: label_Dn
+    label_widget5: label_Dc
+    label_widget6: label_height
+    label_widget7: label_length
+    table: data_table
+    widget_search: search_input
+
+    MDTopAppBar:
+        title: "Калькулятор токаря"
+        anchor_title: "right"
+        right_action_items: [["close-outline", lambda x: root.closed(self), "Закрыть", "Close"]]
+        left_action_items: [["menu", lambda x: root.bar_menu(x), "Меню", "Menu"]]
+
+    MDBottomNavigation:
+        selected_color_background: 0, 0, 0, 1
+        text_color_active: "lightgrey"
+
+        MDBottomNavigationItem:
+            name: 'screen 1'
+            icon: 'calculator'
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDBoxLayout:
+                spacing: 30
+                orientation: "vertical"
+
+                MDBoxLayout:
+                    size_hint: (1, .25)
+
+                    MDTextField:
+                        id: text_input
+                        size_hint: (1, None)
+                        height: "30dp"
+                        font_size: '25sp'
+                        hint_text: "Ввод данных"
+                        mode: "rectangle"
+                        halign: 'center'
+                        valign: 'left'
+                        input_type: 'number'
+                        input_filter: 'int'
+
+                    MDIconButton:
+                        icon: "backspace"
+                        user_font_size: "64sp"
+                        on_release:
+                            root.backspace()
+
+                MDGridLayout:
+                    size_hint: (1, .75)
+                    cols: 2
+                    spacing: 20
+
+                    ItemButton:
+                        id: button_menu
+                        text: "Изделие"
+                        icon: "checkbox-marked-circle-plus-outline"
+                        on_release:
+                            root.drop_menu()
+                    ItemLabel:
+                        id: name_product
+                        text: "-"
+
+                    ItemButton:
+                        text: "Номер изделия"
+                        icon: "alpha-n-box"
+                        on_release:
+                            root.numer_product()
+                    ItemLabel:
+                        id: label_numer
+                        text: "0"
+
+                    ItemButton:
+                        text: "Периметр начальный"
+                        icon: "horizontal-rotate-counterclockwise"
+                        on_release:
+                            root.text_Pn()
+                    ItemLabel:
+                        id: label_Pn
+                        text: "0"
+
+                    ItemButton:
+                        text: "Периметр конечный"
+                        icon: "horizontal-rotate-counterclockwise"
+                        on_release:
+                            root.text_Pc()
+                    ItemLabel:
+                        id: label_Pc
+                        text: "0"
+
+                    ItemButton:
+                        text: "Диаметр начальный"
+                        icon: "diameter-variant"
+                        on_release:
+                            root.text_Dn()
+                    ItemLabel:
+                        id: label_Dn
+                        text: "0"
+
+                    ItemButton:
+                        text: "Диаметр конечный"
+                        icon: "diameter-variant"
+                        on_release:
+                            root.text_Dc()
+                    ItemLabel:
+                        id: label_Dc
+                        text: "0"
+
+                    ItemButton:
+                        text: "Глубина среза"
+                        icon: "arrow-expand-vertical"
+                        on_release:
+                            root.text_height()
+                    ItemLabel:
+                        id: label_height
+                        text: "0"
+
+                    ItemButton:
+                        text: "Обработанная длина"
+                        icon: "arrow-expand-horizontal"
+                        on_release:
+                            root.length()
+                    ItemLabel:
+                        id: label_length
+                        text: "0"
+
+
+                MDFloatingActionButtonSpeedDial:
+                    id: speed_dial
+                    data:
+                        {"Сохранить локально": ["content-save-outline", "on_press", lambda x: root.save_create_tables()],
+                        "Отчистить окна": ["broom", "on_press", lambda x: root.clear_text()],
+                        "Информационное окно": ["table-of-contents", "on_press", lambda x: root.show_dialog()],}
+                    root_button_anim: True
+                    hint_animation: True
+
+        MDBottomNavigationItem:
+            name: 'screen 2'
+            padding: [10, 10, 10, 5]
+            icon: 'file-table-box'
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDTextField:
+                id: search_input
+                size_hint: (1, .14)
+                pos_hint: {"center_x": .5, "center_y": .95}
+                height: "30dp"
+                font_size: '25sp'
+                hint_text: "Поиск по №"
+                mode: "rectangle"
+                halign: 'center'
+                valign: 'left'
+                input_type: 'number'
+                input_filter: 'int'
+
+            MDBoxLayout:
+                spacing: 5
+                orientation: "vertical"
+                padding: 10
+                size_hint: (1, .9)
+
+                ScrollView:
+                    id: data_table
+                    size_hint: (1, .76)
+
+                MDBoxLayout:
+                    size_hint: (1, .1)
+                    spacing: 10
+
+                    MDRectangleFlatIconButton:
+                        size_hint_x: .2
+                        md_bg_color: "#bbeb0c"
+                        text: "Журнал"
+                        text_color: "black"
+                        icon_color: "black"
+                        icon: 'table-of-contents'
+                        on_release:
+                            root.tables_data()
+
+                    MDRectangleFlatIconButton:
+                        size_hint_x: .2
+                        md_bg_color: "#bbeb0c"
+                        text: "Поиск"
+                        text_color: "black"
+                        icon_color: "black"
+                        icon: 'database-search-outline'
+                        on_release:
+                            root.search_base()
+
+                    MDRectangleFlatIconButton:
+                        size_hint_x: .2
+                        md_bg_color: "#bbeb0c"
+                        text: "Удалить"
+                        text_color: "black"
+                        icon_color: "black"
+                        icon: 'delete-sweep'
+                        on_release:
+                            root.delete_row()
+
+                    MDRectangleFlatIconButton:
+                        size_hint_x: .2
+                        md_bg_color: "#eb0c0c"
+                        text: "Очистить"
+                        text_color: "white"
+                        icon_color: "white"
+                        icon: 'delete-forever'
+                        on_release:
+                            root.clear_database()
+
