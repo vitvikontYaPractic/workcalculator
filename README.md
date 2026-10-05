@@ -4,6 +4,12 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Release](https://img.shields.io/github/v/release/vitvikontYaPractic/workcalculator)
 
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![Kivy](https://img.shields.io/badge/kivy-2.3.0-green)
+![KivyMD](https://img.shields.io/badge/kivymd-1.2.0-orange)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Release](https://img.shields.io/github/v/release/vitvikontYaPractic/workcalculator)
+
 # Work Calculator (Калькулятор токаря)
 
 Android-приложение для токарных расчётов. Восстановлено из утерянного проекта в октябре 2026.
